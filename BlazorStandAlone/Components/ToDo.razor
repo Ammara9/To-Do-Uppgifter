@@ -1,0 +1,54 @@
+﻿@inject BlazorStandAlone.Services.GlobalStateToDo GlobalStateToDo
+
+<div>
+    <input type="text" @bind="newItem" />
+    <button class="text-secondary" type="submit" @onclick="AddToList">Add</button>
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div style="color: red;">@errorMessage</div>
+    }
+</div>
+
+<ul>
+    @foreach (var item in GlobalStateToDo.toDoList)
+    {
+        <li>
+            @item
+            <button @onclick="() => Remove(item)">Remove</button>
+        </li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public string? newItem { get; set; }
+
+    private string? errorMessage; // Error message for validation
+    public List<string?> toDoList = new();
+
+    // protected override void OnInitialized()
+    // {
+    //     GlobalStateToDo.OnChange += StateHasChanged;
+    // }
+
+    public void AddToList(){
+        if (string.IsNullOrWhiteSpace(newItem))
+        {
+            errorMessage = "Item cannot be empty or only whitespace.";
+            return;
+        }
+
+        errorMessage = null;
+        GlobalStateToDo.AddToList(newItem);
+        newItem = string.Empty;
+    }
+    public void Remove(string? item){
+        GlobalStateToDo.Remove(item);
+    }
+
+
+    // public void Dispose()
+    // {
+    //     GlobalStateToDo.OnChange -= StateHasChanged;
+    // }
+}
