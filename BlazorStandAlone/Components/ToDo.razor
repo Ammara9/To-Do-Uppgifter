@@ -26,10 +26,10 @@
     private string? errorMessage; // Error message for validation
     public List<string?> toDoList = new();
 
-    // protected override void OnInitialized()
-    // {
-    //     GlobalStateToDo.OnChange += StateHasChanged;
-    // }
+    protected override void OnInitialized()
+    {
+        GlobalStateToDo.OnChange += StateHasChanged;
+    }
 
     public void AddToList(){
         if (string.IsNullOrWhiteSpace(newItem))
@@ -47,8 +47,8 @@
     }
 
 
-    // public void Dispose()
-    // {
-    //     GlobalStateToDo.OnChange -= StateHasChanged;
-    // }
+    public void Dispose()
+    {
+        GlobalStateToDo.OnChange -= StateHasChanged;
+    }
 }

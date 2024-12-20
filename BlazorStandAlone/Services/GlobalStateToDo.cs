@@ -6,7 +6,7 @@ namespace BlazorStandAlone.Services
     {
         public List<string?> toDoList { get; set; } = new();
 
-        //public event Action? OnChange;
+        public event Action? OnChange;
 
         public void AddToList(string? item)
         {
@@ -18,6 +18,6 @@ namespace BlazorStandAlone.Services
             toDoList.Remove(item);
         }
 
-        //public void NotifyStateChanged() => OnChange?.Invoke();
+        public void NotifyStateChanged() => OnChange?.Invoke();
     }
 }

@@ -17,7 +17,7 @@ namespace BlazorStandAlone
                 BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
             });
             //Service for todo
-            builder.Services.AddScoped<GlobalStateToDo>();
+            builder.Services.AddSingleton<GlobalStateToDo>();
 
             await builder.Build().RunAsync();
         }
